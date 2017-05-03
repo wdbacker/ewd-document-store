@@ -1,6 +1,6 @@
 {
   "name": "ewd-document-store",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "Persistent JavaScript Objects and Document Database using Global Storage",
   "main": "index.js",
   "scripts": {
