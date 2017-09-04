@@ -1,3 +1,5 @@
+'use strict';
+
 var events = require('events');
 var rewire = require('rewire');
 var DocumentStore = rewire('../../lib/documentStore');

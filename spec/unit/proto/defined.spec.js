@@ -1,14 +1,17 @@
+'use strict';
+
 var defined = require('../../../lib/proto/defined');
 var dbMock = require('../mocks/db');
 
 describe(' - unit/proto/defined:', function () {
   var DocumentStore;
   var documentStore;
+  var DocumentNode;
   var documentNode;
   var db;
 
   beforeAll(function () {
-    var DocumentNode = function (documentStore) {
+    DocumentNode = function (documentStore) {
       this.documentStore = documentStore;
       this._node = {
         global: 'rob',

@@ -1,14 +1,17 @@
+'use strict';
+
 var count = require('../../../lib/proto/count');
 var dbMock = require('../mocks/db');
 
 describe(' - unit/proto/count:', function () {
   var DocumentStore;
   var documentStore;
+  var DocumentNode;
   var documentNode;
   var db;
 
   beforeAll(function () {
-    var DocumentNode = function (documentStore) {
+    DocumentNode = function (documentStore) {
       this.documentStore = documentStore;
       this.documentName = 'rob';
       this.path = ['address'];
@@ -28,7 +31,7 @@ describe(' - unit/proto/count:', function () {
     documentNode = new documentStore.DocumentNode();
   });
 
-  it('should return children count', function () {
+  it('should return node children count', function () {
     var expected = 2;
 
     documentStore.db.order.and.returnValues({result: 'address'}, {result: ''});
