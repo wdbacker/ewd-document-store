@@ -1,11 +1,14 @@
 # ewd-document-store
- 
+
+[![Build Status](https://travis-ci.org/killmenot/ewd-document-store.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-document-store)
+[![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-document-store/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-document-store?branch=tests)
+
 Persistent JavaScript Objects and a fine-grained Document Database, using a Global Storage database
 
 Rob Tweed <rtweed@mgateway.com>  
 7 March 2016, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
 
-Twitter: @rtweed
+Twitter: [@rtweed](https://twitter.com/rtweed)
 
 Google Group for discussions, support, advice etc: [http://groups.google.co.uk/group/enterprise-web-developer-community](http://groups.google.co.uk/group/enterprise-web-developer-community)
 
@@ -13,6 +16,7 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 ## Installation
 
     npm install ewd-document-store
+
 
 ## Using ewd-document-store
 
@@ -22,7 +26,7 @@ For full details of ewd-document-store see:
 
 ## License
 
- Copyright (c) 2013-16 M/Gateway Developments Ltd,                           
+ Copyright (c) 2013-17 M/Gateway Developments Ltd,                           
  Reigate, Surrey UK.                                                      
  All rights reserved.                                                     
                                                                            
