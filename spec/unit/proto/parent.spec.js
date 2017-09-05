@@ -1,9 +1,9 @@
 'use strict';
 
-var firstChild = require('../../../lib/proto/firstChild');
+var parent = require('../../../lib/proto/parent');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/firstChild:', function () {
+describe(' - unit/proto/parent:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -15,10 +15,13 @@ describe(' - unit/proto/firstChild:', function () {
       this.documentStore = documentStore;
       this.documentName = documentName;
       this.path = subs || [];
+      this.name = this.path.length > 0 ?
+        this.path[this.path.length - 1] :
+        this.documentName;
     };
 
     var proto = DocumentNode.prototype;
-    Object.defineProperty(proto, 'firstChild', firstChild);
+    Object.defineProperty(proto, 'parent', parent);
 
     DocumentStore = function (db) {
       this.db = db;
@@ -33,27 +36,25 @@ describe(' - unit/proto/firstChild:', function () {
   });
 
   it('should be enumerable', function () {
-    expect(firstChild.enumerable).toBeFalsy();
+    expect(parent.enumerable).toBeFalsy();
   });
 
   it('should be not configurable', function () {
-    expect(firstChild.configurable).toBeFalsy();
+    expect(parent.configurable).toBeFalsy();
   });
 
-  it('should return firstChild', function () {
-    documentStore.db.order.and.returnValue({
-      result: 'baz',
-      subscripts: ['baz']
-    });
-
-    var actual = documentNode.firstChild;
+  it('should return parent node', function () {
+    var actual = documentNode.parent;
 
     expect(actual instanceof DocumentNode).toBeTruthy();
-    expect(documentNode.$baz).toBe(actual);
+    expect(actual.documentName).toBe('rob');
+    expect(actual.path).toEqual(['foo']);
+    expect(actual.$bar).toBe(documentNode);
+  });
 
-    expect(documentStore.db.order).toHaveBeenCalledWith({
-      global: 'rob',
-      subscripts: ['foo', 'bar', '']
-    });
+  it('should return nothing', function () {
+    documentNode = new documentStore.DocumentNode('rob');
+
+    expect(documentNode.parent).toBeUndefined();
   });
 });

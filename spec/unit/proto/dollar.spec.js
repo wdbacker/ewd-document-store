@@ -15,7 +15,7 @@ describe(' - unit/proto/dollar:', function () {
       this.documentStore = documentStore;
 
       this.documentName = documentName;
-      this.path = subs;
+      this.path = subs || [];
 
       this.$ = $;
     };
@@ -35,7 +35,7 @@ describe(' - unit/proto/dollar:', function () {
   it('should return nothing', function () {
     var actual = documentNode.$();
 
-    expect(actual).not.toBeDefined();
+    expect(actual).toBeUndefined();
   });
 
   it('should return child node', function () {
@@ -61,13 +61,13 @@ describe(' - unit/proto/dollar:', function () {
   it('should return nothing when one of subscript values is null', function () {
     var actual = documentNode.$(['bar', null]);
 
-    expect(actual).not.toBeDefined();
+    expect(actual).toBeUndefined();
   });
 
   it('should return nothing when one of subscript values is undefined', function () {
     var actual = documentNode.$(['baz', undefined]);
 
-    expect(actual).not.toBeDefined();
+    expect(actual).toBeUndefined();
   });
 
   it('should return child node when one of subscript is valid array', function () {
@@ -81,6 +81,6 @@ describe(' - unit/proto/dollar:', function () {
   it('should not add to parent when one of subscript is valid array', function () {
     var actual = documentNode.$(['bar', 'baz'], true);
 
-    expect(actual['$bar,baz']).not.toBeDefined();
+    expect(actual['$bar,baz']).toBeUndefined();
   });
 });

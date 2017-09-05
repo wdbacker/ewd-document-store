@@ -14,7 +14,7 @@ describe(' - unit/proto/lastChild:', function () {
     DocumentNode = function (documentStore, documentName, subs) {
       this.documentStore = documentStore;
       this.documentName = documentName;
-      this.path = subs;
+      this.path = subs || [];
     };
 
     var proto = DocumentNode.prototype;

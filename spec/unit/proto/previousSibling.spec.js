@@ -1,9 +1,9 @@
 'use strict';
 
-var firstChild = require('../../../lib/proto/firstChild');
+var previousSibling = require('../../../lib/proto/previousSibling');
 var dbMock = require('../mocks/db');
 
-describe(' - unit/proto/firstChild:', function () {
+describe(' - unit/proto/previousSibling:', function () {
   var DocumentStore;
   var documentStore;
   var DocumentNode;
@@ -18,7 +18,7 @@ describe(' - unit/proto/firstChild:', function () {
     };
 
     var proto = DocumentNode.prototype;
-    Object.defineProperty(proto, 'firstChild', firstChild);
+    Object.defineProperty(proto, 'previousSibling', previousSibling);
 
     DocumentStore = function (db) {
       this.db = db;
@@ -29,31 +29,38 @@ describe(' - unit/proto/firstChild:', function () {
   beforeEach(function () {
     db = dbMock.mock();
     documentStore = new DocumentStore(db);
-    documentNode = new documentStore.DocumentNode('rob', ['foo', 'bar']);
+    documentNode = new documentStore.DocumentNode('rob', ['foo']);
   });
 
   it('should be enumerable', function () {
-    expect(firstChild.enumerable).toBeFalsy();
+    expect(previousSibling.enumerable).toBeFalsy();
   });
 
   it('should be not configurable', function () {
-    expect(firstChild.configurable).toBeFalsy();
+    expect(previousSibling.configurable).toBeFalsy();
   });
 
-  it('should return firstChild', function () {
-    documentStore.db.order.and.returnValue({
+  it('should return previous sibling node', function () {
+    documentStore.db.previous.and.returnValue({
       result: 'baz',
       subscripts: ['baz']
     });
 
-    var actual = documentNode.firstChild;
+    var actual = documentNode.previousSibling;
 
     expect(actual instanceof DocumentNode).toBeTruthy();
-    expect(documentNode.$baz).toBe(actual);
+    expect(actual.documentName).toBe('rob');
+    expect(actual.path).toEqual(['baz']);
 
-    expect(documentStore.db.order).toHaveBeenCalledWith({
+    expect(documentStore.db.previous).toHaveBeenCalledWith({
       global: 'rob',
-      subscripts: ['foo', 'bar', '']
+      subscripts: ['foo']
     });
+  });
+
+  it('should return nothing', function () {
+    documentStore.db.previous.and.returnValue({result: ''});
+
+    expect(documentNode.previousSibling).toBeUndefined();
   });
 });
