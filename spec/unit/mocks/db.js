@@ -10,6 +10,7 @@ module.exports = {
       kill: jasmine.createSpy(),
       next: jasmine.createSpy(),
       get: jasmine.createSpy(),
+      set: jasmine.createSpy(),
 
       /*jshint camelcase: false */
       global_directory: jasmine.createSpy()
