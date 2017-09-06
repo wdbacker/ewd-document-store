@@ -13,7 +13,8 @@ module.exports = {
       set: jasmine.createSpy(),
 
       /*jshint camelcase: false */
-      global_directory: jasmine.createSpy()
+      global_directory: jasmine.createSpy(),
+      next_node: jasmine.createSpy()
       /*jshint camelcase: true */
     };
 

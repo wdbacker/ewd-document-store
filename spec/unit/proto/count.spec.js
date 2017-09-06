@@ -34,7 +34,16 @@ describe(' - unit/proto/count:', function () {
   it('should return node children count', function () {
     var expected = 2;
 
-    documentStore.db.order.and.returnValues({result: 'address'}, {result: ''});
+    documentStore.db.order.and.returnValues(
+      {
+        global: 'rob',
+        subscripts: ['address'],
+        result: 'addressValue'
+      },
+      {
+        result: ''
+      }
+    );
 
     var actual = documentNode.countChildren();
 
@@ -49,7 +58,9 @@ describe(' - unit/proto/count:', function () {
     ]);
     expect(documentStore.db.order.calls.argsFor(1)).toEqual([
       {
-        result: 'address'
+        global: 'rob',
+        subscripts: ['address'],
+        result: 'addressValue'
       }
     ]);
   });

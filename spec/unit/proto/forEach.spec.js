@@ -47,12 +47,12 @@ describe(' - unit/proto/forEach:', function () {
       {
         global: 'rob',
         subscripts: ['foo'],
-        result: 'foo'
+        result: 'fooValue'
       },
       {
         global: 'rob',
         subscripts: ['bar'],
-        result: 'bar'
+        result: 'barValue'
       }, {
         result: ''
       }
@@ -62,12 +62,12 @@ describe(' - unit/proto/forEach:', function () {
       {
         global: 'rob',
         subscripts: ['bar'],
-        result: 'bar'
+        result: 'barValue'
       },
       {
         global: 'rob',
         subscripts: ['foo'],
-        result: 'foo'
+        result: 'fooValue'
       }, {
         result: ''
       }
@@ -104,8 +104,8 @@ describe(' - unit/proto/forEach:', function () {
     documentNode.forEachChild(callback);
 
     expect(callback).toHaveBeenCalledTimes(2);
-    expect(callback.calls.argsFor(0)).toEqual(['foo', jasmine.any(DocumentNode)]);
-    expect(callback.calls.argsFor(1)).toEqual(['bar', jasmine.any(DocumentNode)]);
+    expect(callback.calls.argsFor(0)).toEqual(['fooValue', jasmine.any(DocumentNode)]);
+    expect(callback.calls.argsFor(1)).toEqual(['barValue', jasmine.any(DocumentNode)]);
   });
 
   it('should quit from loop', function () {
@@ -114,7 +114,7 @@ describe(' - unit/proto/forEach:', function () {
     documentNode.forEachChild(callback);
 
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith('foo', jasmine.any(DocumentNode));
+    expect(callback).toHaveBeenCalledWith('fooValue', jasmine.any(DocumentNode));
   });
 
   ['reverse', {direction: 'reverse'}].forEach(function (params) {
@@ -145,7 +145,7 @@ describe(' - unit/proto/forEach:', function () {
     documentNode.forEachChild(params, callback);
 
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith('foo', jasmine.any(DocumentNode));
+    expect(callback).toHaveBeenCalledWith('fooValue', jasmine.any(DocumentNode));
   });
 
   it('should process nodes forwards using range (from/to)', function () {
