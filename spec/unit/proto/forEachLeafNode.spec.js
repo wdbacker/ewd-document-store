@@ -76,7 +76,6 @@ describe(' - unit/proto/forEachLeafNode:', function () {
       subscripts: ['foo', 'baz']
     }));
     /*jshint camelcase: true */
-
   });
 
   it('should call callback exact times with correct arguments', function () {
