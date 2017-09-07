@@ -40,7 +40,6 @@
       "lib/**/*.js"
     ],
     "exclude": [
-      "lib/tests/*.js",
       "spec/**/*.js"
     ]
   },

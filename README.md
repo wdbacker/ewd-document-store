@@ -1,7 +1,6 @@
 # ewd-document-store
 
-[![Build Status](https://travis-ci.org/killmenot/ewd-document-store.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-document-store)
-[![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-document-store/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-document-store?branch=tests)
+[![Build Status](https://travis-ci.org/killmenot/ewd-document-store.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-document-store) [![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-document-store/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-document-store?branch=tests)
 
 Persistent JavaScript Objects and a fine-grained Document Database, using a Global Storage database
 
@@ -20,8 +19,8 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ## Using ewd-document-store
 
-For full details of ewd-document-store see: 
-[http://gradvs1.mgateway.com/download/ewd-document-store.pdf](http://gradvs1.mgateway.com/download/ewd-document-store.pdf)
+  - For full details of ewd-document-store see: [http://gradvs1.mgateway.com/download/ewd-document-store.pdf](http://gradvs1.mgateway.com/download/ewd-document-store.pdf)
+  - For a complete, working examples, refer to [examples](https://github.com/robtweed/ewd-document-store-examples) that uses `ewd-document-store`
 
 
 ## License
