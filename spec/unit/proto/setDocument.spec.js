@@ -36,27 +36,6 @@ describe(' - unit/proto/setDocument:', function () {
     documentStore = new DocumentStore(db);
     documentNode = new documentStore.DocumentNode('rob', ['address']);
     callback = jasmine.createSpy();
-
-    // /*jshint camelcase: false */
-    // documentStore.db.next_node.and.returnValues(
-    //   {
-    //     global: 'rob',
-    //     subscripts: ['foo', 'bar'],
-    //     data: 'barValue',
-    //     defined: 1
-    //   },
-    //   {
-    //     global: 'rob',
-    //     subscripts: ['foo', 'baz'],
-    //     data: 'bazValue',
-    //     defined: 1
-    //   },
-    //   {
-    //     global: 'rob',
-    //     defined: 0
-    //   }
-    // );
-    // /*jshint camelcase: true */
   });
 
   it('should process null', function () {
