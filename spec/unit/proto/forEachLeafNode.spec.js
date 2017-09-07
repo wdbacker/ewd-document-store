@@ -97,8 +97,7 @@ describe(' - unit/proto/forEachLeafNode:', function () {
   });
 
   it('should quit from loop', function () {
-    // https://github.com/robtweed/ewd-document-store/issues/6
-    callback.and.returnValue(false);
+    callback.and.returnValue(true);
 
     documentNode.forEachLeafNode(callback);
 
