@@ -294,6 +294,7 @@ describe(' - integration/ewd-document-store: ', function () {
 
       it('should return from-to range (boundaries)', function () {
         var expected = [
+          ['Briggs', 'temp', 'foo', 'Briggs'],
           ['Davies', 'temp', 'foo', 'Davies'],
           ['Davis', 'temp', 'foo', 'Davis']
         ];
@@ -553,7 +554,7 @@ describe(' - integration/ewd-document-store: ', function () {
         documentNode.$('foo').setDocument(foo);
 
         var actual = documentNode.$('foo').getDocument();
-        console.log(actual);
+
         expect(actual).toEqual(expected);
       });
 

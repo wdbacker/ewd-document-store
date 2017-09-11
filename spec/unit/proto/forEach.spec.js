@@ -146,6 +146,12 @@ describe(' - unit/proto/forEach:', function () {
 
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith('fooValue', jasmine.any(DocumentNode));
+
+    expect(documentStore.db.previous.calls.count()).toBe(1);
+    expect(documentStore.db.previous).toHaveBeenCalledWith({
+      global: 'rob',
+      subscripts: ['f']
+    });
   });
 
   it('should process nodes forwards using range (from/to)', function () {
@@ -178,6 +184,12 @@ describe(' - unit/proto/forEach:', function () {
     expect(callback).toHaveBeenCalledWith('bar', jasmine.any(DocumentNode));
 
     expect(documentStore.db.order).toHaveBeenCalledTimes(3);
+
+    expect(documentStore.db.previous.calls.count()).toBe(1);
+    expect(documentStore.db.previous).toHaveBeenCalledWith({
+      global: 'rob',
+      subscripts: ['b']
+    });
   });
 
   it('should process nodes reverse using range (from/to)', function () {
