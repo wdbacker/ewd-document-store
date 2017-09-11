@@ -32,7 +32,7 @@ describe(' - unit/proto/count:', function () {
   });
 
   it('should return node children count', function () {
-    var expected = 2;
+    var expected = 1;
 
     documentStore.db.order.and.returnValues(
       {

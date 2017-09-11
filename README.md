@@ -23,6 +23,14 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
   - For a complete, working examples, refer to [examples](https://github.com/robtweed/ewd-document-store-examples) that uses `ewd-document-store`
 
 
+## Integration tests
+
+  * You must have [InterSystem Caché](http://www.intersystems.com/our-products/cache/cache-overview/) installed
+  * You must have `cache.node` in npm global registy. Read [Installation](http://docs.intersystems.com/latest/csp/docbook/DocBook.UI.Page.cls?KEY=BXJS_intro#BXJS_intro_install) to get more details
+  * Run `npm link cache.node` before running integration tests
+  * You may need to run this as sudo because of permissions
+
+
 ## License
 
  Copyright (c) 2013-17 M/Gateway Developments Ltd,                           
@@ -44,11 +52,3 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
   See the License for the specific language governing permissions and      
    limitations under the License.  
-   
-
-
-
-
-    
-
-

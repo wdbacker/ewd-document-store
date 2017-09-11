@@ -12,3 +12,6 @@ package-lock.json
 # Coverage
 .nyc_output
 coverage
+
+# Env
+.env

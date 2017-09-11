@@ -2,16 +2,13 @@
   "name": "ewd-document-store",
   "version": "1.17.0",
   "config": {
-    "date": "7 September 2017"
+    "date": "3 May 2017"
   },
   "description": "Persistent JavaScript Objects and Document Database using Global Storage",
   "author": "Rob Tweed, M/Gateway Developments Ltd",
   "license": "Apache-2.0",
   "homepage": "https://github.com/robtweed/ewd-document-store#readme",
   "main": "index.js",
-  "config": {
-    "date": "3 May 2017"
-  },
   "bugs": {
     "url": "https://github.com/robtweed/ewd-document-store/issues"
   },
@@ -48,6 +45,7 @@
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
+    "dotenv": "^4.0.0",
     "jasmine": "^2.8.0",
     "jasmine-spec-reporter": "^4.1.1",
     "jshint": "^2.9.5",
