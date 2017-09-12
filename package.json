@@ -21,7 +21,7 @@
     "url": "git+https://github.com/robtweed/ewd-document-store.git"
   },
   "scripts": {
-    "lint": "jshint spec",
+    "lint": "jshint examples spec",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "jasmine --config=spec/support/unit.json",
     "test:integration": "jasmine --config=spec/support/integration.json",
