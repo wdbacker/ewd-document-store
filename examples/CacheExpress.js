@@ -4,7 +4,7 @@
  | ewd-document-store: Persistent JavaScript Objects and Document Database  |
  |                      using Global Storage                                |
  |                                                                          |
- | Copyright (c) 2016 M/Gateway Developments Ltd,                           |
+ | Copyright (c) 2017 M/Gateway Developments Ltd,                           |
  | Reigate, Surrey UK.                                                      |
  | All rights reserved.                                                     |
  |                                                                          |
@@ -25,71 +25,65 @@
  |  limitations under the License.                                          |
  ----------------------------------------------------------------------------
 
-  6 March 2016
+  7 September 2017
 
 */
 
-// ewd-qoper8 Worker Module example which connects to a Cache database
+// Demonstrates use of CacheModule.js worker module which connects each
+// worker process to the Cache database, intergrated with Express
 
-module.exports = function() {
+// Start using:
+// $ node examples/CacheExpress.js
+// You may need to run this as sudo due to Cache permissions
 
-  this.on('start', function(isFirst) {
+'use strict';
 
-    // establish the connection to Cache database
+require('dotenv').config();
 
-    var DocumentStore = require('ewd-document-store');
-    var interface = require('cache');
-    this.db = new interface.Cache();
-    console.log('db: ' + JSON.stringify(this.db));
+var express = require('express');
+var bodyParser = require('body-parser');
+var qoper8 = require('ewd-qoper8');
+var qx = require('ewd-qoper8-express');
 
-    var ok = this.db.open({
-      path: '/opt/cache/mgr',
-      username: '_SYSTEM',
-      password: 'SYS',
-      namespace: 'USER'
+var app = express();
+app.use(bodyParser.json());
+
+var q = new qoper8.masterProcess();
+qx.init(q);
+
+app.post('/qoper8', function (req, res) {
+  q.handleMessage(req.body, function (resultObj) {
+    delete resultObj.finished;
+    res.send(resultObj);
+  });
+});
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
+q.on('start', function () {
+  this.worker.module = process.cwd() + '/examples/CacheModule';
+});
+
+q.on('started', function () {
+  var server = app.listen(8080, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('EWD-Express listening at http://%s:%s', host, port);
+    console.log('__dirname = ' + __dirname);
+  });
+
+  var io = require('socket.io')(server);
+  io.on('connection', function (socket) {
+    socket.on('my-request', function (data) {
+      q.handleMessage(data, function (resultObj) {
+        delete resultObj.finished;
+        socket.emit('my-response', resultObj);
+      });
     });
-
-    console.log('ok: ' + JSON.stringify(ok));
-
-    this.documentStore = new DocumentStore(this.db);
-
-    // example handler for the afterSet event which is fired every time a GlobalNode value changes:
-
-    this.documentStore.on('afterSet', function(node) {
-      console.log('afterSet: ' + JSON.stringify(node));
-    });
-
-    //  Clear down the requests global when ewd-qoper8 first started:
-
-    if (isFirst) {
-      var glo = new this.documentStore.DocumentNode('requests');
-      glo.delete();
-    }
   });
+});
 
-  this.on('message', function(messageObj, send, finished) {
-    
-    // for example - save every incoming message object to the requests global
-
-    var glo = new this.documentStore.DocumentNode('requests', [process.pid]);
-    var ix = glo.increment();
-    
-    glo.$(ix).setDocument(messageObj);
-
-    var results = {
-      hello: 'from worker ' + process.pid,
-      time: new Date().toString(),
-      message: messageObj
-    };
-    finished(results);
-  });
-  
-  this.on('stop', function() {
-
-    // make sure the connection to Cache is closed before the child process closes;
-
-    console.log('Worker ' + process.pid + ' closing database');
-    this.db.close();
-  });
-
-};
+q.start();

@@ -5,18 +5,52 @@
     "date": "8 September 2017"
   },
   "description": "Persistent JavaScript Objects and Document Database using Global Storage",
+  "author": "Rob Tweed, M/Gateway Developments Ltd",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/robtweed/ewd-document-store#readme",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bugs": {
+    "url": "https://github.com/robtweed/ewd-document-store/issues"
+  },
+  "engines": {
+    "node": ">= 0.10",
+    "npm": ">= 2.15"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robtweed/ewd-document-store.git"
   },
-  "author": "Rob Tweed, M/Gateway Developments Ltd",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/robtweed/ewd-document-store/issues"
+  "scripts": {
+    "lint": "jshint examples spec",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jasmine --config=spec/support/unit.json",
+    "test:integration": "jasmine --config=spec/support/integration.json",
+    "coverage:unit": "nyc --reporter=html --reporter=text jasmine --config=spec/support/unit.json",
+    "coverage:integration": "nyc --reporter=html --reporter=text jasmine --config=spec/support/integration.json",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "validate": "npm ls"
   },
-  "homepage": "https://github.com/robtweed/ewd-document-store#readme"
+  "pre-commit": [
+    "lint",
+    "test:unit"
+  ],
+  "nyc": {
+    "all": true,
+    "include": [
+      "lib/**/*.js"
+    ],
+    "exclude": [
+      "spec/**/*.js"
+    ]
+  },
+  "devDependencies": {
+    "coveralls": "^2.13.1",
+    "dotenv": "^4.0.0",
+    "jasmine": "^2.8.0",
+    "jasmine-spec-reporter": "^4.1.1",
+    "jshint": "^2.9.5",
+    "nyc": "^11.1.0",
+    "pre-commit": "^1.2.2",
+    "rewire": "^2.5.2"
+  }
 }

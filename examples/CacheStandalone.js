@@ -4,7 +4,7 @@
  | ewd-document-store: Persistent JavaScript Objects and Document Database  |
  |                      using Global Storage                                |
  |                                                                          |
- | Copyright (c) 2016 M/Gateway Developments Ltd,                           |
+ | Copyright (c) 2017 M/Gateway Developments Ltd,                           |
  | Reigate, Surrey UK.                                                      |
  | All rights reserved.                                                     |
  |                                                                          |
@@ -25,33 +25,33 @@
  |  limitations under the License.                                          |
  ----------------------------------------------------------------------------
 
-  6 March 2016
+  7 September 2017
 
 */
 
-// standalone example demonstrating use of ewd-globals with Cache database
-//  you may need to run this as sudo because of permissions
+'use strict';
+
+// Standalone example demonstrating use of ewd-document-store with Cache database
+// You may need to run this as sudo because of permissions
+
+require('dotenv').config();
 
 var DocumentStore = require('ewd-document-store');
-var interface = require('cache');
-var db = new interface.Cache();
-console.log('db: ' + JSON.stringify(db));
+var Cache = require('cache').Cache;
+var db = new Cache();
 
 // Change these parameters to match your GlobalsDB or Cache system:
-
 var ok = db.open({
-  path: '/opt/cache/mgr',
-  username: '_SYSTEM',
-  password: 'SYS',
-  namespace: 'USER'
+  path: process.env.CACHE_MGR_PATH || '/opt/cache/mgr',
+  username: process.env.CACHE_USERNAME || '_SYSTEM',
+  password: process.env.CACHE_PASSWORD || 'SYS',
+  namespace: process.env.CACHE_NAMESPACE || 'USER'
 });
 
 console.log('ok: ' + JSON.stringify(ok));
+console.log('version: ' + db.version());
 
 var documentStore = new DocumentStore(db);
-
-console.log(db.version());
-
 var rob = new documentStore.DocumentNode('rob');
 
 var temp = new documentStore.DocumentNode('temp', [1]);
@@ -62,7 +62,7 @@ console.log('value: ' + temp.value);
 
 console.log(JSON.stringify(temp.getDocument(), null, 2));
 
-documentStore.on('afterSet', function(node) {
+documentStore.on('afterSet', function (node) {
   console.log('afterSet: ' + JSON.stringify(node));
 });
 
@@ -90,28 +90,34 @@ rob.$('z').setDocument(z);
 console.log(JSON.stringify(rob.getDocument(), null, 2));
 
 console.log('forEachChild through rob document:');
-rob.forEachChild(function(nodeName) {
+rob.forEachChild(function (nodeName) {
   console.log(nodeName);
 });
 
 console.log('forEachChild through rob document, stopping early:');
-rob.forEachChild(function(nodeName) {
+rob.forEachChild(function (nodeName) {
   console.log(nodeName);
-  if (nodeName === 'x') return true;
+  if (nodeName === 'x') {
+    return true;
+  }
 });
 
 console.log('forEachChild through rob document, in reverse:');
-rob.forEachChild({direction: 'reverse'}, function(nodeName) {
+rob.forEachChild({
+  direction: 'reverse'
+}, function (nodeName) {
   console.log(nodeName);
 });
 
 console.log('forPrefix through rob global starting x:');
-rob.forEachChild({prefix: 'x'}, function(subscript) {
+rob.forEachChild({
+  prefix: 'x'
+}, function (subscript) {
   console.log(subscript);
 });
 
 console.log('forEachLeafNode through rob global:');
-rob.forEachLeafNode(function(value) {
+rob.forEachLeafNode(function (value) {
   console.log(value);
 });
 
@@ -134,52 +140,86 @@ var last = rob.lastChild;
 console.log('last: ' + last.name);
 console.log('previous = ' + last.previousSibling.name);
 
-
 var z = rob.$z;
-console.log('------------');
 console.log('Names from Br to Da');
-z.forEachChild({range: {from: 'Br', to: 'Da'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName + '; firstName: ' + node.value);
+z.forEachChild({
+  range: {
+    from: 'Br',
+    to: 'Da'
+  }
+}, function (lastName, node) {
+  console.log('LastName: ' + lastName + '; firstName: ' + node.value);
 });
 console.log('------------');
 console.log('Names from Br to Db');
-z.forEachChild({range: {from: 'Br', to: 'Db'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName + '; firstName: ' + node.value);
+z.forEachChild({
+  range: {
+    from: 'Br',
+    to: 'Db'
+  }
+}, function (lastName, node) {
+  console.log('LastName: ' + lastName + '; firstName: ' + node.value);
 });
 console.log('------------');
 console.log('Names from Briggs to Davis');
-z.forEachChild({range: {from: 'Briggs', to: 'Davis'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName + '; firstName: ' + node.value);
+z.forEachChild({
+  range: {
+    from: 'Briggs',
+    to: 'Davis'
+  }
+}, function (lastName, node) {
+  console.log('LastName: ' + lastName + '; firstName: ' + node.value);
 });
 console.log('------------');
 console.log('Names from B to D');
-z.forEachChild({range: {from: 'B', to: 'D'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName + '; firstName: ' + node.value);
+z.forEachChild({
+  range: {
+    from: 'B',
+    to: 'D'
+  }
+}, function (lastName, node) {
+  console.log('LastName: ' + lastName + '; firstName: ' + node.value);
 });
 console.log('------------');
 console.log('Names from B');
-z.forEachChild({range: {from: 'B'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName);
+z.forEachChild({
+  range: {
+    from: 'B'
+  }
+}, function (lastName, node) {
+  //jshint unused:false
+  console.log('LastName: ' + lastName);
 });
 console.log('------------');
 console.log('Names from D');
-z.forEachChild({range: {from: 'D'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName);
+z.forEachChild({
+  range: {
+    from: 'D'
+  }
+}, function (lastName, node) {
+  //jshint unused:false
+  console.log('LastName: ' + lastName);
 });
 console.log('------------');
 console.log('Names to D');
-z.forEachChild({range: {to: 'D'}}, function(lastName, node) {
-	console.log('LastName: ' + lastName);
+z.forEachChild({
+  range: {
+    to: 'D'
+  }
+}, function (lastName, node) {
+  //jshint unused:false
+  console.log('LastName: ' + lastName);
 });
 console.log('------------');
 
-
+console.log('temp before: ' + temp.value);
 temp.value = 1234;
+console.log('temp after: ' + temp.value);
 
 temp.delete();
+console.log('temp after delete: ' + temp.value);
 
 var list = documentStore.list();
 console.log(JSON.stringify(list));
 
 db.close();
-
