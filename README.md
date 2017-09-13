@@ -1,6 +1,6 @@
 # ewd-document-store
 
-[![Build Status](https://travis-ci.org/killmenot/ewd-document-store.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-document-store) [![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-document-store/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-document-store?branch=tests)
+[![Build Status](https://travis-ci.org/robtweed/ewd-document-store.svg?branch=master)](https://travis-ci.org/robtweed/ewd-document-store) [![Coverage Status](https://coveralls.io/repos/github/robtweed/ewd-document-store/badge.svg?branch=master)](https://coveralls.io/github/robtweed/ewd-document-store?branch=master)
 
 Persistent JavaScript Objects and a fine-grained Document Database, using a Global Storage database
 
