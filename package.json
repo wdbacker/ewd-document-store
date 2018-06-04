@@ -7,10 +7,10 @@
   "description": "Persistent JavaScript Objects and Document Database using Global Storage",
   "author": "Rob Tweed, M/Gateway Developments Ltd",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/robtweed/ewd-document-store#readme",
+  "homepage": "https://github.com/wdbacker/ewd-document-store#readme",
   "main": "index.js",
   "bugs": {
-    "url": "https://github.com/robtweed/ewd-document-store/issues"
+    "url": "https://github.com/wdbacker/ewd-document-store/issues"
   },
   "engines": {
     "node": ">= 0.10",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robtweed/ewd-document-store.git"
+    "url": "git+https://github.com/wdbacker/ewd-document-store.git"
   },
   "scripts": {
     "lint": "jshint examples spec",
